@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import { userRepository } from "../repositories/user.repository.js";
+import { generateToken } from "../utils/jwt.js"
 
 export const userService = {
     async registerUser({ name, email, password }) {
@@ -36,12 +37,16 @@ export const userService = {
             throw new Error("Invalid email or password");
         }
 
+
+        const token = generateToken(user._id);
+
         return {
+            token,
             user: {
                 id: user._id,
                 name: user.name,
                 email: user.email
             }
-        };
+        }
     }
-};
+}
