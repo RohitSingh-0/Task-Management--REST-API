@@ -5,8 +5,38 @@ export const taskRepository = {
         return await Task.create(taskData);
     },
 
-    async findAllByUser(userId) {
-        return await Task.find({ user: userId });
+    async findAllByUser(userId, search, status, priority, page, limit) {
+        const query = {
+            user: userId
+        };
+
+        if (search) {
+            query.$or = [
+                { title: { $regex: search, $options: "i" } },
+                { description: { $regex: search, $options: "i" } }
+            ];
+        }
+
+        if (status) {
+            query.status = status;
+        }
+
+        if (priority) {
+            query.priority = priority;
+        }
+
+        const skip = (page - 1) * limit;
+
+        const tasks = await Task.find(query)
+            .skip(skip)
+            .limit(limit);
+
+        const totalTasks = await Task.countDocuments(query);
+
+        return {
+            tasks,
+            totalTasks
+        };
     },
 
     async findById(taskId, userId) {

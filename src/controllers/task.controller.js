@@ -11,5 +11,31 @@ export const taskController = {
             message: "Task created successfully",
             task
         });
+    },
+
+    async getAll(req, res) {
+        const { search, status, priority } = req.query;
+
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit) || 10;
+
+        const result = await taskService.getAllTasks(
+            req.user.userId,
+            search,
+            status,
+            priority,
+            page,
+            limit
+        );
+
+        const totalPages = Math.ceil(result.totalTasks / limit);
+
+        res.status(200).json({
+            tasks: result.tasks,
+            page,
+            limit,
+            totalTasks: result.totalTasks,
+            totalPages
+        });
     }
 };

@@ -6,5 +6,17 @@ export const taskService = {
             ...taskData,
             user: userId
         });
+    },
+
+    async getAllTasks(userId, search, status, priority, page, limit) {
+        return await taskRepository.findAllByUser(
+            userId,
+            search,
+            status,
+            priority,
+            page,
+            limit
+        );
     }
+
 };
