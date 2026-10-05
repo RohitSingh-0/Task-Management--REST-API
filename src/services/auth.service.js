@@ -48,5 +48,19 @@ export const userService = {
                 email: user.email
             }
         }
+    },
+
+    async getProfile(userId) {
+    const user = await userRepository.findById(userId);
+
+    if (!user) {
+        throw new Error("User not found");
     }
+
+    return {
+        id: user._id,
+        name: user.name,
+        email: user.email
+    };
+}
 }
