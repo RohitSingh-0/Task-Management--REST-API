@@ -17,6 +17,10 @@ export const taskService = {
             page,
             limit
         );
-    }
+    },
+
+    async getTaskById(taskId, userId) {
+    return await taskRepository.findById(taskId, userId);
+}
 
 };

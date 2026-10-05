@@ -37,5 +37,22 @@ export const taskController = {
             totalTasks: result.totalTasks,
             totalPages
         });
+    },
+
+    async getById(req, res) {
+        const task = await taskService.getTaskById(
+            req.params.id,
+            req.user.userId
+        );
+
+        if (!task) {
+            return res.status(404).json({
+                message: "Task not found"
+            });
+        }
+
+        res.status(200).json({
+            task
+        });
     }
 };
