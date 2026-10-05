@@ -29,6 +29,13 @@ export const taskService = {
             userId,
             taskData
         );
+    },
+
+    async deleteTask(taskId, userId) {
+        return await taskRepository.delete(
+            taskId,
+            userId
+        );
     }
 
 };

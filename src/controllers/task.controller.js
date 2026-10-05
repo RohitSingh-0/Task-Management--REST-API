@@ -73,5 +73,22 @@ export const taskController = {
         message: "Task updated successfully",
         task
     });
+},
+
+async delete(req, res) {
+    const task = await taskService.deleteTask(
+        req.params.id,
+        req.user.userId
+    );
+
+    if (!task) {
+        return res.status(404).json({
+            message: "Task not found"
+        });
+    }
+
+    res.status(200).json({
+        message: "Task deleted successfully"
+    });
 }
 };
