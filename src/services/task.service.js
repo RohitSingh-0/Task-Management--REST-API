@@ -20,7 +20,15 @@ export const taskService = {
     },
 
     async getTaskById(taskId, userId) {
-    return await taskRepository.findById(taskId, userId);
-}
+        return await taskRepository.findById(taskId, userId);
+    },
+
+    async updateTask(taskId, userId, taskData) {
+        return await taskRepository.update(
+            taskId,
+            userId,
+            taskData
+        );
+    }
 
 };

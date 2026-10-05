@@ -54,5 +54,24 @@ export const taskController = {
         res.status(200).json({
             task
         });
+    },
+
+    async update(req, res) {
+    const task = await taskService.updateTask(
+        req.params.id,
+        req.user.userId,
+        req.body
+    );
+
+    if (!task) {
+        return res.status(404).json({
+            message: "Task not found"
+        });
     }
+
+    res.status(200).json({
+        message: "Task updated successfully",
+        task
+    });
+}
 };
