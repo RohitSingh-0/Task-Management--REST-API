@@ -6,7 +6,6 @@ export const taskController = {
             req.body,
             req.user.userId
         );
-
         res.status(201).json({
             message: "Task created successfully",
             task
@@ -28,7 +27,9 @@ export const taskController = {
             limit
         );
 
-        const totalPages = Math.ceil(result.totalTasks / limit);
+        const totalPages = Math.ceil(
+            result.totalTasks / limit
+        );
 
         res.status(200).json({
             tasks: result.tasks,
@@ -45,50 +46,33 @@ export const taskController = {
             req.user.userId
         );
 
-        if (!task) {
-            return res.status(404).json({
-                message: "Task not found"
-            });
-        }
-
         res.status(200).json({
             task
         });
     },
 
     async update(req, res) {
-    const task = await taskService.updateTask(
-        req.params.id,
-        req.user.userId,
-        req.body
-    );
+        const task = await taskService.updateTask(
+            req.params.id,
+            req.user.userId,
+            req.body
+        );
 
-    if (!task) {
-        return res.status(404).json({
-            message: "Task not found"
+        res.status(200).json({
+            message: "Task updated successfully",
+            task
+        });
+    },
+
+    async delete(req, res) {
+        await taskService.deleteTask(
+            req.params.id,
+            req.user.userId
+        );
+
+        res.status(200).json({
+            message: "Task deleted successfully"
         });
     }
 
-    res.status(200).json({
-        message: "Task updated successfully",
-        task
-    });
-},
-
-async delete(req, res) {
-    const task = await taskService.deleteTask(
-        req.params.id,
-        req.user.userId
-    );
-
-    if (!task) {
-        return res.status(404).json({
-            message: "Task not found"
-        });
-    }
-
-    res.status(200).json({
-        message: "Task deleted successfully"
-    });
-}
 };

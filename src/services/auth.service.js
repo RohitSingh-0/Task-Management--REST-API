@@ -1,13 +1,14 @@
 import bcrypt from "bcryptjs";
 import { userRepository } from "../repositories/user.repository.js";
 import { generateToken } from "../utils/jwt.js"
+import AppError from "../utils/AppError.js";
 
 export const userService = {
     async registerUser({ name, email, password }) {
         const existingUser = await userRepository.findByEmail(email);
 
         if (existingUser) {
-            throw new Error("User already exists");
+            throw new AppError("User already exists", 409);
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -18,14 +19,18 @@ export const userService = {
             password: hashedPassword
         });
 
-        return user;
+        return {
+            id: user._id,
+            name: user.name,
+            email: user.email
+        };
     },
 
     async loginUser({ email, password }) {
         const user = await userRepository.findByEmail(email);
 
         if (!user) {
-            throw new Error("Invalid email or password");
+            throw new AppError("User not found", 404);
         }
 
         const isPasswordValid = await bcrypt.compare(
@@ -34,7 +39,7 @@ export const userService = {
         );
 
         if (!isPasswordValid) {
-            throw new Error("Invalid email or password");
+            throw new AppError("Invalid email or password", 401);
         }
 
 
@@ -51,16 +56,16 @@ export const userService = {
     },
 
     async getProfile(userId) {
-    const user = await userRepository.findById(userId);
+        const user = await userRepository.findById(userId);
 
-    if (!user) {
-        throw new Error("User not found");
+        if (!user) {
+            throw new AppError("Invalid email or password", 401);
+        }
+
+        return {
+            id: user._id,
+            name: user.name,
+            email: user.email
+        };
     }
-
-    return {
-        id: user._id,
-        name: user.name,
-        email: user.email
-    };
-}
 }

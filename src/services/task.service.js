@@ -1,4 +1,5 @@
 import { taskRepository } from "../repositories/task.repository.js";
+import AppError from "../utils/AppError.js";
 
 export const taskService = {
     async createTask(taskData, userId) {
@@ -20,22 +21,42 @@ export const taskService = {
     },
 
     async getTaskById(taskId, userId) {
-        return await taskRepository.findById(taskId, userId);
+        const task = await taskRepository.findById(
+            taskId,
+            userId
+        );
+
+        if (!task) {
+            throw new AppError("Task not found", 404);
+        }
+
+        return task;
     },
 
     async updateTask(taskId, userId, taskData) {
-        return await taskRepository.update(
+        const task = await taskRepository.update(
             taskId,
             userId,
             taskData
         );
+
+        if (!task) {
+            throw new AppError("Task not found", 404);
+        }
+
+        return task;
     },
 
     async deleteTask(taskId, userId) {
-        return await taskRepository.delete(
+        const task = await taskRepository.delete(
             taskId,
             userId
         );
-    }
 
+        if (!task) {
+            throw new AppError("Task not found", 404);
+        }
+
+        return task;
+    }
 };
