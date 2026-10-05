@@ -1,0 +1,615 @@
+{
+  "info": {
+    "_collection_link": "https://go.postman.co/collection/48702165-e8eef724-290b-438e-9105-3cf43963dd7f?source=collection_link",
+    "_exporter_id": "48702165",
+    "_postman_id": "e8eef724-290b-438e-9105-3cf43963dd7f",
+    "name": "task-management-REST api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "http://localhost:5000/api/auth/login",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_04ni}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"email\": \"john@example.com\",\r\n    \"password\": \"password123\"\r\n}"
+        },
+        "description": "Authenticates an existing user and initiates a session by submitting credentials to the login endpoint. The request body requires two fields: `email` (the user's registered email address) and `password` (the user's account password). On successful authentication, the server returns a JWT (JSON Web Token) that can be used to authorize subsequent protected requests. The Bearer token in the Authorization header is stored securely using a vault variable.",
+        "header": [],
+        "method": "POST",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "raw": "http://localhost:5000/api/auth/login"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/auth/profile",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_0i1z}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"email\": \"john@example.com\",\r\n    \"password\": \"password123\"\r\n}"
+        },
+        "description": "## GET /api/auth/profile\n\nRetrieves the authenticated user's profile information.\n\n### Authentication\n\nThis endpoint requires a valid **Bearer token** passed in the `Authorization` header. The token is referenced via the variable `{{json_web_token_0i1z}}`.\n\n### Notes\n\n> ⚠️ **Request Body:** A JSON body containing `email` and `password` is currently attached to this request. However, `GET` requests conventionally do not include a body — most servers and proxies will ignore it. If credentials are needed for authentication, they should be passed via the Bearer token (already configured) rather than in the request body. Consider removing the body or switching to a `POST` request if credential submission is intended.\n\n### Expected Response\n\nOn success, the server returns the profile data of the currently authenticated user.",
+        "header": [],
+        "method": "GET",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "profile"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "raw": "http://localhost:5000/api/auth/profile"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/auth/register",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_0i1z}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"name\": \"john\",\r\n    \"email\": \"john@example.com\",\r\n    \"password\": \"password123\"\r\n}"
+        },
+        "description": "StartFragment\n\n- **Purpose** — registers a new user account via the auth endpoint\n    \n- **Request body fields** — a table documenting `name`, `email`, and `password` with their types and descriptions, plus a JSON example\n    \n- **Authentication** — a note on the Bearer token using the vault variable `{{json_web_token_0i1z}}`\n    \n\nEndFragment",
+        "header": [],
+        "method": "POST",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "register"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "raw": "http://localhost:5000/api/auth/register"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/tasks",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_0i1z}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n  \"title\": \"Build Task API\",\r\n  \"description\": \"Implement task creation endpoint\",\r\n  \"status\": \"Pending\",\r\n  \"priority\": \"High\",\r\n  \"dueDate\": \"2026-10-15\"\r\n}"
+        },
+        "header": [],
+        "method": "POST",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "tasks"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "raw": "http://localhost:5000/api/tasks"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/tasks/6ac34920dd0ef39afdec6854",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_11ut}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"tasks\": []\r\n}"
+        },
+        "description": "finded the task through ID",
+        "header": [],
+        "method": "GET",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "6ac34920dd0ef39afdec6854"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "raw": "http://localhost:5000/api/tasks/6ac34920dd0ef39afdec6854"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/tasks/6ac34920dd0ef39afdec6854",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_11ut}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"title\": \"Build entire App\",\r\n    \"description\": \"Implement complete task management system\",\r\n    \"status\": \"In Progress\",\r\n    \"priority\": \"High\",\r\n    \"dueDate\": \"2026-10-20\"\r\n}"
+        },
+        "description": "here we use PUT to update the task ",
+        "header": [],
+        "method": "PUT",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "6ac34920dd0ef39afdec6854"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "raw": "http://localhost:5000/api/tasks/6ac34920dd0ef39afdec6854"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/tasks/6ac34920dd0ef39afdec6854",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_11ut}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"title\": \"Build entire App\",\r\n    \"description\": \"Implement complete task management system\",\r\n    \"status\": \"In Progress\",\r\n    \"priority\": \"High\",\r\n    \"dueDate\": \"2026-10-20\"\r\n}"
+        },
+        "description": "In this API I used Delete method and it work successfully to delete the existing task",
+        "header": [],
+        "method": "DELETE",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "6ac34920dd0ef39afdec6854"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "raw": "http://localhost:5000/api/tasks/6ac34920dd0ef39afdec6854"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/tasks/",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_11ut}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"title\": \"Hi\",\r\n    \"description\": \"abc\",\r\n    \"status\": \"Pending\",\r\n    \"priority\": \"High\",\r\n    \"dueDate\": \"2026-10-20\"\r\n}"
+        },
+        "description": "ValidationError: Task validation failed: title: Path `title` (`Hi`, length 2) is shorter than the minimum allowed length (3)., description: Path `description` (`abc`, length 3) is shorter than the minimum allowed length (5).<br> &nbsp; &nbsp;at model.validate \r\n\r\npost : http://localhost:5000/api/tasks/\r\nThis Failed because we added validation that the minumum length of the title should be 3 and description should be 5 \r\n",
+        "header": [],
+        "method": "POST",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            ""
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "raw": "http://localhost:5000/api/tasks/"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/tasks/",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_11ut}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"title\": \"Hi\",\r\n    \"description\": \"abc\",\r\n    \"status\": \"Pending\",\r\n    \"priority\": \"High\",\r\n    \"dueDate\": \"2026-10-20\"\r\n}"
+        },
+        "description": "This request is used to verify the API behavior when an invalid task ID is provided. The endpoint is expected to reject the request with a 400 Bad Request response and return a clear error message indicating that the provided task ID is invalid. This test ensures that invalid MongoDB ObjectId values are handled properly without exposing internal database or server errors to the client.\r\n",
+        "header": [],
+        "method": "GET",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "abc123"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "raw": "http://localhost:5000/api/tasks/abc123"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/auth/profile",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"email\": \"wrong@example.com\",\r\n    \"password\": \"wrongpassword\"\r\n}"
+        },
+        "description": "Deletes a specific task identified by its unique MongoDB ObjectId in the URL path (`/api/tasks/:id`).\n\n**Authentication:** Requires a valid Bearer JWT token in the `Authorization` header. Requests without a valid token should be rejected.\n\n**URL Parameter:** The task ID (`507f1f77bcf86cd799439011`) is a MongoDB ObjectId embedded directly in the URL path.\n\n**Expected Behavior:**\n- Returns a success response if the task exists and belongs to the authenticated user.\n- Returns `404 Not Found` if no task matches the provided ID (as observed in the current response).\n\n**Notes:** Although a JSON body is present in this request, it is not required or consumed by a DELETE endpoint — it can be safely removed.",
+        "header": [],
+        "method": "GET",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "profile"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "raw": "http://localhost:5000/api/auth/profile"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/tasks",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_01mt}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n  \"emial\": \"priya@example.com\",\r\n  \"password\": \"Password123\"\r\n}"
+        },
+        "description": "Retrieves all tasks belonging to the authenticated user.\n\nSupports:\n\n* Search by title or description\n* Filter by status\n* Filter by priority\n* Pagination using page and limit query parameters\n\nRequires a valid JWT token.\n",
+        "header": [],
+        "method": "GET",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "tasks"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "raw": "http://localhost:5000/api/tasks"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/tasks?search=API",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_0x5y}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"email\": \"rahul@example.com\",\r\n    \"password\": \"Password123\"\r\n}"
+        },
+        "description": "Searches the authenticated user's tasks by title or description using the search query parameter.\r\n",
+        "header": [],
+        "method": "GET",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "tasks"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "query": [
+            {
+              "key": "search",
+              "value": "API"
+            }
+          ],
+          "raw": "http://localhost:5000/api/tasks?search=API"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": " http://localhost:5000/api/tasks?status=Completed",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_0x5y}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"email\": \"rahul@example.com\",\r\n    \"password\": \"Password123\"\r\n}"
+        },
+        "description": "Filters the authenticated user's tasks by status using the status query parameter.\r\n",
+        "header": [],
+        "method": "GET",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "tasks"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "query": [
+            {
+              "key": "status",
+              "value": "Completed"
+            }
+          ],
+          "raw": "http://localhost:5000/api/tasks?status=Completed"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": " http://localhost:5000/api/tasks?status=Completed",
+      "request": {
+        "auth": {
+          "bearer": [
+            {
+              "key": "token",
+              "type": "string",
+              "value": "{{json_web_token_0x5y}}"
+            }
+          ],
+          "type": "bearer"
+        },
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\r\n    \"email\": \"rahul@example.com\",\r\n    \"password\": \"Password123\"\r\n}"
+        },
+        "description": "Filters the authenticated user's tasks by priority using the priority query parameter\r\n",
+        "header": [],
+        "method": "GET",
+        "url": {
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "api",
+            "tasks"
+          ],
+          "port": "5000",
+          "protocol": "http",
+          "query": [
+            {
+              "key": "priority",
+              "value": "High"
+            }
+          ],
+          "raw": "http://localhost:5000/api/tasks?priority=High"
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "json_web_token_04ni",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0i1z",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_01mt",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0x5y",
+      "secret": true
+    }
+  ]
+}
